@@ -15,8 +15,8 @@ class UserModel {
     return prisma.user.create({ data: { username, password } });
   }
 
-  async updateUser(id: number, name: string, email: string): Promise<any | null> {
-    return prisma.user.update({ where: { id }, data: { name, email } });
+  async updateUser(id: number, username: string, email: string): Promise<any | null> {
+    return prisma.user.update({ where: { id }, data: { username, email } });
   }
 
   async deleteUser(id: number): Promise<any | null> {
