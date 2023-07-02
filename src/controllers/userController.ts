@@ -6,7 +6,7 @@ const userModel = new UserModel();
 class UserController {
   async getAllUsers(req: Request, res: Response): Promise<void> {
     try {
-      const users = await userModel.getAllUsers();
+      const users = await userModel.findMany();
       res.json(users);
     } catch (error) {
       console.error(error);
@@ -17,7 +17,7 @@ class UserController {
   async getUserById(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
-      const user = await userModel.getUserById(parseInt(id));
+      const user = await userModel.findById(parseInt(id));
       if (user) {
         res.json(user);
       } else {
@@ -32,7 +32,7 @@ class UserController {
   async createUser(req: Request, res: Response): Promise<void> {
     const { username, password } = req.body;
     try {
-      const user = await userModel.createUser(username, password);
+      const user = await userModel.create(username, password);
       res.json(user);
     } catch (error) {
       console.error(error);
@@ -44,7 +44,7 @@ class UserController {
     const { id } = req.params;
     const { name, email } = req.body;
     try {
-      const updatedUser = await userModel.updateUser(parseInt(id), name, email);
+      const updatedUser = await userModel.update(parseInt(id), name, email);
       if (updatedUser) {
         res.json(updatedUser);
       } else {
@@ -59,7 +59,7 @@ class UserController {
   async deleteUser(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
-      const deletedUser = await userModel.deleteUser(parseInt(id));
+      const deletedUser = await userModel.delete(parseInt(id));
       if (deletedUser) {
         res.json({ message: 'Xóa người dùng thành công.' });
       } else {

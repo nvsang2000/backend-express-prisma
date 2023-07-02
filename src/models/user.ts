@@ -1,25 +1,38 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
+interface User {
+  email?: string,
+  username: string,
+  displayname?: string,
+  isActive: boolean,
+  password: string,
+  role: string,
+  thumbnail: string,
+}
 const prisma = new PrismaClient();
 
 class UserModel {
-  async getAllUsers(): Promise<any[]> {
+  async findMany(): Promise<User[]> {
     return prisma.user.findMany();
   }
 
-  async getUserById(id: number): Promise<any | null> {
+  async findById(id: number): Promise<User | null> {
     return prisma.user.findUnique({ where: { id } });
   }
 
-  async createUser(username: string, password: string): Promise<any> {
+  async create(username: string, password: string): Promise<User> {
     return prisma.user.create({ data: { username, password } });
   }
 
-  async updateUser(id: number, username: string, email: string): Promise<any | null> {
+  async update(
+    id: number,
+    username: string,
+    email: string
+  ): Promise<User | null> {
     return prisma.user.update({ where: { id }, data: { username, email } });
   }
 
-  async deleteUser(id: number): Promise<any | null> {
+  async delete(id: number): Promise<User | null> {
     return prisma.user.delete({ where: { id } });
   }
 }
