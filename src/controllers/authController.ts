@@ -2,8 +2,8 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { Request, Response } from "express";
 import UserModel from "../models/User";
-import { SystemError, ResponseSuccess } from "../utils/response";
-import { ResError } from "../utils/constant";
+import { SystemError, ResponseSuccess, ResponseFailed } from "../utils/response";
+import { MESSAGE_ERR } from "../utils/constant";
 
 const User = new UserModel();
 const secretKey = "your-secret-key";
@@ -19,17 +19,15 @@ class AuthController {
     try {
       const { email, password }: any = req.body;
       const user = await User.findByEmail(email);
-      if (!user)
-        return res.status(401).json({ message: "Invalid email or password" });
-
+      if (!user)  return ResponseFailed(res, MESSAGE_ERR.EMAIL_INVALID);
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (!passwordMatch)
-        return res.status(401).json({ message: "Invalid email or password" });
+        return ResponseFailed(res, MESSAGE_ERR.INVALID_EMAIL_OR_PASSWORD);
 
       const accessToken = this.generateToken(user);
       return ResponseSuccess(res, accessToken);
     } catch (error) {
-      return SystemError(res, ResError.SYS_ERROR);
+      return SystemError(res, MESSAGE_ERR.SYS_ERROR);
     }
   }
 }

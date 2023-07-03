@@ -15,16 +15,15 @@ class UserModel {
     return prisma.user.findUnique({ where: { id } });
   }
 
-  async create(username: string, password: string): Promise<any> {
-    return prisma.user.create({ data: { username, password } });
+  async create(createUser: any): Promise<any> {
+    return prisma.user.create({ data: createUser });
   }
 
   async update(
     id: number,
-    username: string,
-    email: string
+    updatedUser: any,
   ): Promise<any> {
-    return prisma.user.update({ where: { id }, data: { username, email } });
+    return prisma.user.update({ where: { id }, data: updatedUser });
   }
 
   async delete(id: number): Promise<any> {
