@@ -33,11 +33,14 @@ class UserController {
   async create(req: Request, res: Response): Promise<any> {
     const { email, password } = req.body;
     try {
+      console.log('hello', req.body);
+      
       const checkUser = await User.findByEmail(email);
       if (checkUser) return ResponseFailed(res, MESSAGE_ERR.EMAIL_INVALID);
       const user = await User.create(req.body);
       return ResponseSuccess(res, user);
     } catch (e) {
+      console.log(e)
       return SystemError(res, MESSAGE_ERR.SYS_ERROR);
     }
   }
