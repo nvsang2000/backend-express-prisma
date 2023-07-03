@@ -10,8 +10,9 @@ app.get("/", (_req: Request, res: Response) => {
   return res.send("Express Typescript on Vercel");
 });
 app.use("/api", adminRoter);
-app.listen(3000 || process.env.PORT, () => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
   console.log(
-    `Server successfully listening at http://localhost:${process.env.PORT}`
+    `Running on ${PORT}`
   );
 });
