@@ -1,11 +1,7 @@
-import { Request, Response } from "express";
-import UserModel from "../models/user";
-import {
-  ResponseFailed,
-  ResponseSuccess,
-  SystemError,
-} from "../utils/response";
-import { MESSAGE_ERR } from "../utils/constant";
+import { Request, Response } from 'express';
+import UserModel from '../models/user';
+import { ResponseFailed, ResponseSuccess, SystemError } from '../utils/response';
+import { MESSAGE_ERR } from '../utils/constant';
 
 const User = new UserModel();
 
@@ -15,7 +11,7 @@ class UserController {
       const users = await User.findMany();
       return ResponseSuccess(res, users);
     } catch (e) {
-      console.log(e)
+      console.log(e);
       return SystemError(res, e);
     }
   }
@@ -39,7 +35,7 @@ class UserController {
       const user = await User.create(req.body);
       return ResponseSuccess(res, user);
     } catch (e) {
-      console.log(e)
+      console.log(e);
       return SystemError(res, e);
     }
   }

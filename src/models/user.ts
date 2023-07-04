@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -10,7 +10,7 @@ class UserModel {
   async findByEmail(email: string): Promise<any> {
     return prisma.user.findUnique({ where: { email } });
   }
-  
+
   async findById(id: number): Promise<any> {
     return prisma.user.findUnique({ where: { id } });
   }
@@ -19,10 +19,7 @@ class UserModel {
     return prisma.user.create({ data: createUser });
   }
 
-  async update(
-    id: number,
-    updatedUser: any,
-  ): Promise<any> {
+  async update(id: number, updatedUser: any): Promise<any> {
     return prisma.user.update({ where: { id }, data: updatedUser });
   }
 
