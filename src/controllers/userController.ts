@@ -19,7 +19,7 @@ class UserController {
   async findById(req: Request, res: Response): Promise<any> {
     const { id } = req.params;
     try {
-      const user = await User.findById(parseInt(id));
+      const user = await User.findById(id);
       if (!user) return ResponseFailed(res, MESSAGE_ERR.DATA_NOT_FOUND);
       return ResponseSuccess(res, user);
     } catch (e) {
@@ -43,9 +43,9 @@ class UserController {
   async update(req: Request, res: Response): Promise<any> {
     const { id } = req.params;
     try {
-      const checkUser = await User.findById(+id);
+      const checkUser = await User.findById(id);
       if (!checkUser) return ResponseFailed(res, MESSAGE_ERR.EMAIL_NOT_EXITS);
-      const updatedUser = await User.update(+id, req.body);
+      const updatedUser = await User.update(id, req.body);
       return ResponseSuccess(res, updatedUser);
     } catch (e) {
       return SystemError(res, e);
@@ -55,9 +55,9 @@ class UserController {
   async delete(req: Request, res: Response): Promise<any> {
     const { id } = req.params;
     try {
-      const checkUser = await User.findById(+id);
+      const checkUser = await User.findById(id);
       if (!checkUser) return ResponseFailed(res, MESSAGE_ERR.EMAIL_NOT_EXITS);
-      const deletedUser = await User.delete(parseInt(id));
+      const deletedUser = await User.delete(id);
       return ResponseSuccess(res, deletedUser);
     } catch (e) {
       return SystemError(res, e);
