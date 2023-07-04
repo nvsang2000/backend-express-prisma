@@ -16,7 +16,7 @@ class UserController {
       return ResponseSuccess(res, users);
     } catch (e) {
       console.log(e)
-      return SystemError(res, MESSAGE_ERR.SYS_ERROR);
+      return SystemError(res, e);
     }
   }
 
@@ -27,22 +27,20 @@ class UserController {
       if (!user) return ResponseFailed(res, MESSAGE_ERR.EMAIL_NOT_EXIST);
       return ResponseSuccess(res, user);
     } catch (e) {
-      return SystemError(res, MESSAGE_ERR.SYS_ERROR);
+      return SystemError(res, e);
     }
   }
 
   async create(req: Request, res: Response): Promise<any> {
     const { email, password } = req.body;
     try {
-      console.log('hello', req.body);
-      
       const checkUser = await User.findByEmail(email);
-      if (checkUser) return ResponseFailed(res, MESSAGE_ERR.EMAIL_INVALID);
+      if (checkUser) return ResponseFailed(res, MESSAGE_ERR.EMAIL_ALREADY_EXIST);
       const user = await User.create(req.body);
       return ResponseSuccess(res, user);
     } catch (e) {
       console.log(e)
-      return SystemError(res, MESSAGE_ERR.SYS_ERROR);
+      return SystemError(res, e);
     }
   }
 
@@ -50,11 +48,11 @@ class UserController {
     const { id } = req.params;
     try {
       const checkUser = await User.findById(+id);
-      if (!checkUser) return ResponseFailed(res, MESSAGE_ERR.EMAIL_INVALID);
+      if (!checkUser) return ResponseFailed(res, MESSAGE_ERR.EMAIL_NOT_EXITS);
       const updatedUser = await User.update(+id, req.body);
       return ResponseSuccess(res, updatedUser);
     } catch (e) {
-      return SystemError(res, MESSAGE_ERR.SYS_ERROR);
+      return SystemError(res, e);
     }
   }
 
@@ -62,11 +60,11 @@ class UserController {
     const { id } = req.params;
     try {
       const checkUser = await User.findById(+id);
-      if (!checkUser) return ResponseFailed(res, MESSAGE_ERR.EMAIL_INVALID);
+      if (!checkUser) return ResponseFailed(res, MESSAGE_ERR.EMAIL_NOT_EXITS);
       const deletedUser = await User.delete(parseInt(id));
       return ResponseSuccess(res, deletedUser);
     } catch (e) {
-      return SystemError(res, MESSAGE_ERR.SYS_ERROR);
+      return SystemError(res, e);
     }
   }
 }
