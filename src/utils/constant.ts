@@ -5,7 +5,6 @@ export const MESSAGE_ERR = {
   FORBIDDEN_ACCESS: "Forbidden access",
   EMAIL_NOT_EXITS: "Email does not exist",
   EMAIL_ALREADY_EXIST: "Email already exists",
-  EMAIL_NOT_EXIST: "Email does not exist",
   INVALID_EMAIL_OR_PASSWORD: "Invalid email or password",
   DATA_NOT_FOUND: "Data not found",
 };

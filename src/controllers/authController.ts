@@ -19,7 +19,7 @@ class AuthController {
     try {
       const { email, password }: any = req.body;
       const user = await User.findByEmail(email);
-      if (!user)  return ResponseFailed(res, MESSAGE_ERR.EMAIL_INVALID);
+      if (!user)  return ResponseFailed(res, MESSAGE_ERR.EMAIL_NOT_EXITS);
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (!passwordMatch)
         return ResponseFailed(res, MESSAGE_ERR.INVALID_EMAIL_OR_PASSWORD);

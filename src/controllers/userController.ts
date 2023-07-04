@@ -24,7 +24,7 @@ class UserController {
     const { id } = req.params;
     try {
       const user = await User.findById(parseInt(id));
-      if (!user) return ResponseFailed(res, MESSAGE_ERR.EMAIL_NOT_EXIST);
+      if (!user) return ResponseFailed(res, MESSAGE_ERR.DATA_NOT_FOUND);
       return ResponseSuccess(res, user);
     } catch (e) {
       return SystemError(res, e);
