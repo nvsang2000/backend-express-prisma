@@ -4,7 +4,6 @@ import express, { Request, Response } from "express";
 import adminUserRoter from "./routes/admin/user";
 import adminRouter from "./routes/admin/index"
 
-
 const app = express();
 app.use(express.json());
 

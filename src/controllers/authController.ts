@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { Request, Response } from "express";
-import UserModel from "../models/User";
+import UserModel from "../models/user";
 import { SystemError, ResponseSuccess, ResponseFailed } from "../utils/response";
 import { MESSAGE_ERR } from "../utils/constant";
 

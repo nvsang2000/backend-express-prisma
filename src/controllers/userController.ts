@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import UserModel from "../models/User";
+import UserModel from "../models/user";
 import {
   ResponseFailed,
   ResponseSuccess,
@@ -15,6 +15,7 @@ class UserController {
       const users = await User.findMany();
       return ResponseSuccess(res, users);
     } catch (e) {
+      console.log(e)
       return SystemError(res, MESSAGE_ERR.SYS_ERROR);
     }
   }
