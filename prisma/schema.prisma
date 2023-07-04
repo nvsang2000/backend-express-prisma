@@ -8,7 +8,8 @@ datasource db {
 }
 
 model User {
-  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id          Int       @id @default(autoincrement())
+  uuid        String    @unique(map: "User_uuid_key") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   email       String?   @unique(map: "User_email_key")
   displayName String?
   isActive    Boolean   @default(true)
@@ -22,19 +23,21 @@ model User {
 }
 
 model Category {
-  id       String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id       Int       @id @default(autoincrement())
+  uuid     String    @unique(map: "Category_uuid_key") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name     String    @unique(map: "Category_name_key")
   sic      String?   @unique(map: "Category_sic_key")
   isActive Boolean?  @default(true)
   createAt DateTime? @default(now())
   updateAt DateTime? @updatedAt
-  products Product[]  @relation("CategoryToProduct")
+  products Product[] @relation("CategoryToProduct")
 
   @@map("category")
 }
 
 model Product {
-  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id          Int        @id @default(autoincrement())
+  uuid        String     @unique(map: "Product_uuid_key") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name        String
   slug        String
   description String?
@@ -45,7 +48,6 @@ model Product {
   categories  Category[] @relation("CategoryToProduct")
 
   @@map("products")
-
 }
 
 // model Order {

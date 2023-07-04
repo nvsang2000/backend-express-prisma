@@ -7,7 +7,7 @@ class CategoryModel {
     return prisma.category.findMany();
   }
 
-  async findById(id: string): Promise<any> {
+  async findById(id: number): Promise<any> {
     return prisma.category.findUnique({ where: { id } });
   }
 
@@ -15,11 +15,11 @@ class CategoryModel {
     return prisma.category.create({ data: createCategory });
   }
 
-  async update(id: string, updatedCategory: any): Promise<any> {
+  async update(id: number, updatedCategory: any): Promise<any> {
     return prisma.category.update({ where: { id }, data: updatedCategory });
   }
 
-  async delete(id: string): Promise<any> {
+  async delete(id: number): Promise<any> {
     return prisma.category.delete({ where: { id } });
   }
 }

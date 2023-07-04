@@ -19,7 +19,7 @@ class ProductController {
   async findById(req: Request, res: Response): Promise<any> {
     const { id } = req.params;
     try {
-      const product = await Product.findById(id);
+      const product = await Product.findById(+id);
       if (!product) return ResponseFailed(res, MESSAGE_ERR.DATA_NOT_FOUND);
       return ResponseSuccess(res, product);
     } catch (e) {
@@ -40,9 +40,9 @@ class ProductController {
   async update(req: Request, res: Response): Promise<any> {
     const { id } = req.params;
     try {
-      const product = await Product.findById(id);
+      const product = await Product.findById(+id);
       if (!product) return ResponseFailed(res, MESSAGE_ERR.DATA_NOT_FOUND);
-      const updatedUser = await Product.update(id, req.body);
+      const updatedUser = await Product.update(+id, req.body);
       return ResponseSuccess(res, updatedUser);
     } catch (e) {
       return SystemError(res, e);
@@ -52,9 +52,9 @@ class ProductController {
   async delete(req: Request, res: Response): Promise<any> {
     const { id } = req.params;
     try {
-      const product = await Product.findById(id);
+      const product = await Product.findById(+id);
       if (!product) return ResponseFailed(res, MESSAGE_ERR.EMAIL_NOT_EXITS);
-      const deletedUser = await Product.delete(id);
+      const deletedUser = await Product.delete(+id);
       return ResponseSuccess(res, deletedUser);
     } catch (e) {
       return SystemError(res, e);

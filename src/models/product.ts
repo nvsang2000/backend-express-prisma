@@ -7,7 +7,7 @@ class ProductModel {
     return prisma.product.findMany();
   }
 
-  async findById(id: string): Promise<any> {
+  async findById(id: number): Promise<any> {
     return prisma.product.findUnique({ where: { id } });
   }
 
@@ -15,11 +15,11 @@ class ProductModel {
     return prisma.product.create({ data: createProduct });
   }
 
-  async update(id: string, updatedProduct: any): Promise<any> {
+  async update(id: number, updatedProduct: any): Promise<any> {
     return prisma.product.update({ where: { id }, data: updatedProduct });
   }
 
-  async delete(id: string): Promise<any> {
+  async delete(id: number): Promise<any> {
     return prisma.product.delete({ where: { id } });
   }
 }

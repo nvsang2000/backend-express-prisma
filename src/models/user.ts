@@ -11,7 +11,7 @@ class UserModel {
     return prisma.user.findUnique({ where: { email } });
   }
 
-  async findById(id: string): Promise<any> {
+  async findById(id: number): Promise<any> {
     return prisma.user.findUnique({ where: { id } });
   }
 
@@ -19,11 +19,11 @@ class UserModel {
     return prisma.user.create({ data: createUser });
   }
 
-  async update(id: string, updatedUser: any): Promise<any> {
+  async update(id: number, updatedUser: any): Promise<any> {
     return prisma.user.update({ where: { id }, data: updatedUser });
   }
 
-  async delete(id: string): Promise<any> {
+  async delete(id: number): Promise<any> {
     return prisma.user.delete({ where: { id } });
   }
 }
