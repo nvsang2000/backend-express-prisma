@@ -8,7 +8,7 @@ class UserModel {
   }
 
   async findByEmail(email: string): Promise<any> {
-    return prisma.user.findUnique({ where: { email } });
+    return prisma.user.findFirst({ where: { email } });
   }
 
   async findById(id: number): Promise<any> {
