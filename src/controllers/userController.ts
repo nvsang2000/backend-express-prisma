@@ -33,10 +33,8 @@ class UserController {
     const { email, password } = req.body
     try {
       const checkUser = await User.findByEmail(email)
-      console.log('checkUser', checkUser)
       if (checkUser) return ResponseFailed(res, MESSAGE_ERR.EMAIL_ALREADY_EXIST)
       const hashPassword = await hashedPassword(password)
-      console.log('hashPassword', hashPassword)
       const user = await User.create({ email, password: hashPassword })
       return ResponseSuccess(res, user)
     } catch (e) {
