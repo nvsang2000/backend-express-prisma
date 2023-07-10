@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import ProductModel from "models/product";
-import { MESSAGE_ERR } from "utils/constant";
-import { ResponseFailed, ResponseSuccess, SystemError } from "utils/response";
+import ProductModel from "~/models/product";
+import { MESSAGE_ERR } from "~/utils/constant";
+import { ResponseFailed, ResponseSuccess, SystemError } from "~/utils/response";
 
 const Product = new ProductModel();
 
