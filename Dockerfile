@@ -4,10 +4,10 @@ FROM node:18.15.0
 
 # env
 ENV PORT = 3000
-ENV POSTGRES_PRISMA_URL = 'postgres://prisma_database_user:a1E4ibJOYeDy4006EGl5E4NAdrG5dNER@dpg-cimbv3unqqldjqjmfgqg-a.oregon-postgres.render.com/prisma_database'
+ENV POSTGRES_PRISMA_URL = 'postgresql://prisma_database_user:a1E4ibJOYeDy4006EGl5E4NAdrG5dNER@dpg-cimbv3unqqldjqjmfgqg-a.oregon-postgres.render.com/prisma_database'
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /
 
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 COPY package*.json ./
